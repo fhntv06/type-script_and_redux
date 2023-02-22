@@ -1,38 +1,185 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 .App {
-  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-column-gap: 20px;
+  padding: 50px;
+  height: 100vh;
+  width: 100vw;
+  background-image: url('http://cdn.bitrix24.ru/b3047083/landing/07e/07e691fc9374aede0c33199d891b63a0/0_107595_bd02f8c5_XXL_2x.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.container {
+  grid-column: span 6;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  text-align: center;
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 25px;
+}
+
+.container__buttons {
+  display: flex;
+  grid-column-gap: 12px;
+}
+.container-form {
+  display: flex;
+}
+
+.container-form .container__buttons {
+  grid-template-columns: repeat(4, 1fr);
+  grid-column: 1/ -3;
+}
+
+form input {
+  grid-column: 1/ -3;
+}
+
+form button {
+  grid-column: span 2;
+}
+
+input {
+  height: 50px;
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 24px;
+  padding: 10px;
+  border: 1px solid #e6e6e6;
+  
+  transition: box-shadow .5s, color .5s, border-color .5s;
+}
+
+input.error {
+  color: red;
+  border-color: red;
+}
+
+input.error:focus,
+input.error:active,
+input.error:focus-visible {
+  border-color: red;
+  box-shadow: 0px 0px 4px 2px red;
+  transition: box-shadow .5s;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 12px;
+  padding: 12px 20px;
   color: white;
+  background-color: rgb(28, 144, 233);
+  outline: none;
+  transition:
+    background-color .4s,
+    color .6s,
+    box-shadow .8s,
+    transform .8s;
+  border: none;
 }
 
-.App-link {
-  color: #61dafb;
+button:hover:not(:disabled) {
+  background-color: rgb(94, 171, 230);
+  box-shadow:
+    1px -1px 4px 0 rgb(0 144 255),
+    2px -2px 4px 2px rgb(54 163 247);
+  cursor: pointer;
+  transform: translate(-4px, 4px);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+button:disabled {
+  color: rgb(210, 216, 221);
+  background-color: rgb(124, 149, 168);
+}
+
+button:disabled img {
+  filter: grayscale(1);
+}
+
+button img {
+  height: inherit;
+  width: 30px;
+}
+
+.container__list-goods {
+  padding: 24px 0;
+}
+
+.container__list-goods li {
+  list-style: decimal;
+}
+.container__list-goods li:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.modal__message-goods {
+  position: fixed;
+  bottom: 100px;
+  right: 100px;
+  width: max-content;
+  min-width: 250px;
+  height: max-content;
+  padding: 5px 10px;
+  border-radius: 25px;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0;
+}
+
+.modal__message-goods--add {
+  color: rgb(97, 240, 31);
+  box-shadow: 0 0 10px 1px rgb(97 240 31);
+}
+.modal__message-goods--remove {
+  color: rgb(240 42 31);
+  box-shadow: 0 0 10px 1px rgb(240 42 31);
+}
+.modal__message-goods--default {
+  color: rgb(0, 0, 0);
+  box-shadow: 0 0 10px 1px rgb(0, 0, 0);
+}
+
+.modal__message-goods--add,
+.modal__message-goods--remove,
+.modal__message-goods--default {
+  animation-name: messageVisibility;
+  animation-duration: 2s;
+  animation-iteration-count: 1;
+  animation-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+/* .modal__message-goods.visible {
+  animation-duration: 2s;
+  animation-iteration-count: 1;
+  animation-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1);
+} */
+
+/* .modal__message-goods.visible {
+  animation-name: messageVisibility;
+} */
+
+@keyframes messageVisibility {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-25px);
   }
 }
