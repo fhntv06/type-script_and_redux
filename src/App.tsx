@@ -1,25 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useRef, useState } from 'react';
+
 import './App.css';
 
+import FormAddGoods from './components/FormAddGoods/FormAddGoods';
+
 function App() {
+  const appRef = useRef<HTMLDivElement>(null);
+
+  const [messageText, setMessageText] = useState<string>('');
+  const [classes, setClasses] = useState<string[]>([]);
+  const [good, setGood] = useState<string>(''); // есть ошибка с перезаписью состояния йуйq ????? 
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div ref={appRef} className="App">
+        <FormAddGoods
+          messageText={messageText}
+          setMessageText={setMessageText}
+          classes={classes}
+          setClasses={setClasses}
+          good={good}
+          setGood={setGood}
+        />
+      </div>
+  </>
   );
 }
 
