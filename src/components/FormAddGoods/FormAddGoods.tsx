@@ -98,8 +98,8 @@ function FormAddGoods({
           </Button>
         </div>
       </form>
-      <div className='container'>
-        <h3>{goods.length > 0 ? 'Список товаров' : 'Товаров нет'}</h3>
+      <div className='container container-goods'>
+        <h2>{goods.length > 0 ? 'Список товаров' : 'Товаров нет'}</h2>
         <ul className='container__list-goods'>
           {goods.map((name: string, index: number) => (
             name && <li key={index}>{name}</li>
